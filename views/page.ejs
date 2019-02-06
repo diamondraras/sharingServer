@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width initial-scale = 1.0">
+    <meta charset="utf-8">
+    <title>Share our files</title>
+    <link href="styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="styles/style.css" rel="stylesheet" />
+    <link rel="icon" href="favicon.ico">
+  </head>
+  <body data-spy="scroll" data-target=".navbar" id="top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-header">
+        <a id="home1" class=" hidden-xs" style="text-decoration : none" ref=""><img src="icone-min.png"><span class="title">Share our files</span></a>
+        </div>
+      <ul class="nav navbar-nav pull-right">
+        <li class="inline">
+          <a href="#files">Fichiers partagés</a>
+        </li>
+        <li class="inline">
+          <a href="#chat">Chat</a>
+        </li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-inverse navbar-fixed-bottom ">
+      <div class="navbar-text hidden-xs">
+        Copyright © 2017. All Rights Reserved. Diamondra Rasoamanana
+      </div>
+
+      <div class="buttons">
+        <a href="#top" class="btn navbar-btn btn-default btn-lg-top pull-right up"><span class="glyphicon glyphicon-menu-up"></span></a>
+        <a href="#down" class="btn navbar-btn btn-default btn-lg-top pull-right up"><span class="glyphicon glyphicon-menu-down"></span></a>
+      </div>
+
+    </nav>
+    <br ><br ><div id="files">
+
+    </div><br>
+    <div class="container">
+
+      <a id="home2" class=" visible-xs" style="text-decoration : none" ref=""><img src="icone-min.png"><span class="title">Share our files</span></a>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="panel panel-primary" >
+            <div class="panel-heading">
+              <h2 class="panel-title">Nombre de fichier partagé(s) : <%= items.length %></h2>
+            </div>
+            <div class="panel body">
+              <ul class="list-group">
+
+
+                <% for(var i=0 ; i<items.length ; i++) { %>
+                  <li class="list-group-item"> <a href="<%= items[i] %>"><%= items[i] %></a> <a href="<%= items[i] %>" type="submit" class="pull-right btn btn-primary btn-xs"><span class="glyphicon glyphicon-download"></span> Telecharger</a></li>
+                <% } %>
+
+              </ul>
+            </div>
+            <div class="panel-footer">
+              <button type="button" id="button_siofu" class="btn btn-sm btn-primary pull-right">Uploader</button>
+              <form enctype= "multipart/form-data" class="" action="/upload" method="post">
+                <input id="button_upload"class="btn btn-sm btn-default pull-right" type="submit" name="" value="Uploader" style="display: none;">
+                <label class="btn btn-default btn-file">
+                  <span id="label">Parcourir...</span>
+                  <input id="file_input" type="file" name="test" style="display: none;"></label>
+              </form>
+              <input type="checkbox" id="checkbox_progress" checked> Activer la barre de progression
+              <div class="progress progress-striped active" style="display: none" id="hidden_progress">
+                <span class="progress-bar-primary progress-bar" id="progression"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <div class="col-lg-12">
+            <div id="chat">
+
+            </div>
+            <div class="panel panel-primary" >
+              <div class="panel-heading">
+                <h2 class="panel-title">Chat</h2>
+              </div>
+              <div class="panel body">
+
+                <form id="sendMessage">
+                    <button id="envoyer" type="submit" class="pull-right btn btn-primary"><span class="glyphicon glyphicon-send"></span> Envoyer</button>
+                    <div class="input-group">
+                      <span class="input-group-addon" id="pseudo"></span>
+                        <textarea autocomplete="off" id="message" class="form-control" name="message" placeholder="Votre message..." ></textarea>
+                        <a href="#" id="nextFocus"></a>
+                    </div>
+                </form>
+                <button id="start" type="button" class="btn btn-primary btn-block"><span id="icon" class="glyphicon glyphicon-comment"></span><span id="textStart"> Cliquer ici pour participer aux chat !</span></button>
+                <div id="whoWrite"></div>
+                <h4>Messages</h4>
+                <div id="allMessages">
+                  <% for(var i=chat.length-1 ; i>=0 ; i--) { %>
+                  <div class="separation">
+                    <button class="btn btn-primary btn-lg col-md-2"><span class="glyphicon glyphicon-user"></span></button>
+                      <span class="pseudo">
+                        <%= chat[i]['pseudo'] %>
+                      </span>
+                      <div class="message">
+                        <pre><%= chat[i]['message'] %></pre>
+                      </div>
+                    </div>
+                    <% } %>
+                </div>
+
+                  <br>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br><br id="down">
+  </div>
+
+<script src="/siofu/client.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="scripts/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="scripts/functions.js"></script>
+<script type="text/javascript" src="scripts/script.js"></script>
+
+  </body>
+</html>
