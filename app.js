@@ -20,10 +20,16 @@ var messages = []
 var pseudos = []
 var writters = []
 var files_folder_path = process.cwd()+'\\files'
-app.set('view engine','ejs')
+
+var dir = './files';
+
+if (!fs.existsSync(dir)){
+  fs.mkdirSync(dir);
+}
 //Middleware
 
-
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine','ejs')
 app.use(urlencodedParser)
 app.use(jsonParser)
 app.use(siofu.router)
@@ -46,6 +52,11 @@ app.get('/upload',function (request, response) {
 })
 
 app.get('/', function(request, response){
+  
+
+  var fs = require('fs');
+
+
   fs.readdir(files_folder_path, function(err, items) {
   res = response
   res.render('page.ejs',{items : items,chat : messages})
